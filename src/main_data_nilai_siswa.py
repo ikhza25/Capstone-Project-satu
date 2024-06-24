@@ -1,79 +1,78 @@
-# mengimpor modul tabulate yang diperlukan untuk membuat tabel
 from tabulate import tabulate
 
 # List database siswa
 list_data_siswa = [
     {
-        'Nama' : 'Amelia Rahmawati',
-        'NIS' : 11001,
-        'Jenis Kelamin' : 'Perempuan',
-        'Avg Ulangan Harian' : 88,
+        'NIS': 11001,
+        'Nama': 'Amelia Rahmawati',
+        'Jenis Kelamin': 'Perempuan',
+        'Avg Ulangan Harian': 88,
         'MID': 92,
-        'UAS' : 90,
-        'Nilai Akhir' : '',
-        'Ket' : ''
+        'UAS': 90,
+        'Nilai Akhir': '',
+        'Ket': ''
     },
 
     {
-        'Nama' : 'Andi Wardana',
-        'NIS' : 11002,
-        'Jenis Kelamin' : 'Laki-laki',
-        'Avg Ulangan Harian' : 90,
+        'NIS': 11002,
+        'Nama': 'Andi Wardana',
+        'Jenis Kelamin': 'Laki-laki',
+        'Avg Ulangan Harian': 90,
         'MID': 85,
-        'UAS' : 87,
-        'Nilai Akhir' : '',
-        'Ket' : ''
+        'UAS': 87,
+        'Nilai Akhir': '',
+        'Ket': ''
     },
 
     {
-        'Nama' : 'Anggreni Jamila',
-        'NIS' : 11003,
-        'Jenis Kelamin' : 'Perempuan',
-        'Avg Ulangan Harian' : 93,
+        'NIS': 11003,
+        'Nama': 'Anggreni Jamila',
+        'Jenis Kelamin': 'Perempuan',
+        'Avg Ulangan Harian': 93,
         'MID': 84,
-        'UAS' : 90,
-        'Nilai Akhir' : '',
-        'Ket' : ''
+        'UAS': 90,
+        'Nilai Akhir': '',
+        'Ket': ''
     },
 
     {
-        'Nama' : 'Bagus Jatmika',
-        'NIS' : 11004,
-        'Jenis Kelamin' : 'Laki-laki',
-        'Avg Ulangan Harian' : 80,
+        'NIS': 11004,
+        'Nama': 'Bagus Jatmika',
+        'Jenis Kelamin': 'Laki-laki',
+        'Avg Ulangan Harian': 80,
         'MID': 90,
-        'UAS' : 87,
-        'Nilai Akhir' : '',
-        'Ket' : ''
+        'UAS': 87,
+        'Nilai Akhir': '',
+        'Ket': ''
     },
 
     {
-        'Nama' : 'Cornelia Devina',
-        'NIS' : 11005,
-        'Jenis Kelamin' : 'Perempuan',
-        'Avg Ulangan Harian' : 90,
+        'NIS': 11005,
+        'Nama': 'Cornelia Devina',
+        'Jenis Kelamin': 'Perempuan',
+        'Avg Ulangan Harian': 90,
         'MID': 95,
-        'UAS' : 85,
-        'Nilai Akhir' : '',
-        'Ket' : ''
+        'UAS': 85,
+        'Nilai Akhir': '',
+        'Ket': ''
     },
 
     {
-        'Nama' : 'Ikhza Syafa Muis',
-        'NIS' : 11006,
-        'Jenis Kelamin' : 'Laki-laki',
-        'Avg Ulangan Harian' : 100,
+        'NIS': 11006,
+        'Nama': 'Ikhza Syafa Muis',
+        'Jenis Kelamin': 'Laki-laki',
+        'Avg Ulangan Harian': 100,
         'MID': 95,
-        'UAS' : 100,
-        'Nilai Akhir' : '',
-        'Ket' : ''
+        'UAS': 100,
+        'Nilai Akhir': '',
+        'Ket': ''
     }
 
 ]
 
 # Menghitung dan memperbarui hasil dari nilai akhir
 for siswa in list_data_siswa:
-    siswa['Nilai Akhir'] = (siswa['Avg Ulangan Harian'] * 0.3) + (siswa['MID'] * 0.3) + (siswa['UAS'] * 0.4)
+    siswa['Nilai Akhir'] = round((siswa['Avg Ulangan Harian'] * 0.3) + (siswa['MID'] * 0.3) + (siswa['UAS'] * 0.4), 2)
 
 # Menyatakan keterangan untuk siswa apakah lulus atau tidak
 for i in list_data_siswa:
@@ -83,7 +82,7 @@ for i in list_data_siswa:
         i['Ket'] = 'Tidak Lulus'
 
 # Membuat fungsi untuk menampilkan data siswa
-def data_siswa(list_data_siswa, header=['No', 'Nama', 'NIS', 'Jenis Kelamin', 'Avg Ulangan Harian', 'MID', 'UAS', 'Nilai Akhir', 'Ket']):
+def data_siswa(list_data_siswa, header=['No', 'NIS', 'Nama', 'Jenis Kelamin', 'Avg Ulangan Harian', 'MID', 'UAS', 'Nilai Akhir', 'Ket']):
    
     # membuat table kosong
     table1 = []
@@ -94,24 +93,59 @@ def data_siswa(list_data_siswa, header=['No', 'Nama', 'NIS', 'Jenis Kelamin', 'A
     print(tabulate(table1, headers=header, tablefmt='grid'))
 
 # Membuat fungsi untuk menampilkan filter data siswa
-def filter_siswa(list_data_siswa, header=['No', 'Nama', 'NIS', 'Jenis Kelamin', 'Avg Ulangan Harian', 'MID', 'UAS', 'Nilai Akhir', 'Ket']):
+def search_siswa(list_data_siswa, header=['NIS', 'Nama', 'Jenis Kelamin', 'Avg Ulangan Harian', 'MID', 'UAS', 'Nilai Akhir', 'Ket']):
+    # Validasi Input search
+    while True:
+        try:
+            # Memasukkan input NIS Siswa
+            search = int(input('Masukkan NIS yang ingin di cari: '))
 
-    # Memasukkan input jenis kelamin yang ingin di filter
-    jenis_kelamin = input('Masukkan jenis kelamin yang ingin di filter(Laki-laki/Perempuan): ')
+            # Menjalankan fungsi untuk validasi jenis kelamin
+            if 10000 <= search <= 19999:
+                
+                # Membuat table kosong
+                table2 = []
 
-    # Membuat table kosong
-    table2 = []
+                # Membuat tabel untuk hasil filter
+                for siswa in list_data_siswa:
+                    if search == siswa['NIS']:
+                        table2.append([siswa[key] for key in header])
 
-    # Membuat tabel untuk hasil filter
-    for i, siswa in enumerate(list_data_siswa, start=1):
-        if jenis_kelamin.lower() == siswa['Jenis Kelamin'].lower():
-            table2.append([i] + list(siswa.values()))
+                # Menampilkan tabel hasil search
+                if table2:
+                    print(tabulate(table2, headers=header, tablefmt='grid'))
+                    break
+                else:
+                    print("Tidak ada siswa dengan NIS tersebut.")
+            else:
+                print('Silahkan masukkan NIS yang ingin dicari dengan benar!')
+        except ValueError:
+            print('Silahkan inputkan angka!')    
 
-    # Menampilkan tabel hasil filter
-    if table2:
-        print(tabulate(table2, headers=header, tablefmt='grid'))
-    else:
-        print("Tidak ada siswa dengan jenis kelamin tersebut.")
+# Membuat fungsi untuk menampilkan filter data siswa
+def filter_siswa(list_data_siswa, header=['NIS', 'Nama', 'Jenis Kelamin', 'Avg Ulangan Harian', 'MID', 'UAS', 'Nilai Akhir', 'Ket']):
+    while True:
+        try:
+            # Memasukkan input jenis kelamin yang ingin di filter
+            jenis_kelamin = input('\nMasukkan kategori jenis kelamin yang ingin ditampilkan (Laki-laki/Perempuan): ')
+
+            # Membuat table kosong
+            table3 = []
+
+            # Membuat tabel untuk hasil filter
+            for i, siswa in enumerate(list_data_siswa, start=1):
+                if jenis_kelamin.lower() == siswa['Jenis Kelamin'].lower():
+                    table3.append(list(siswa.values()))
+
+            # Menampilkan tabel hasil filter
+            if table3:
+                table3 = [[i] + row for i, row in enumerate(table3, start=1)]
+                print(tabulate(table3, headers=header, tablefmt='grid'))
+                break
+            else:
+                pass
+        except:
+            print('Silahkan masukkan kategori jenis kelamin (Laki-laki/Perempuan)!')
 
 # Membuat fungsi untuk menambah data siswa
 def tambah_siswa():
@@ -120,7 +154,7 @@ def tambah_siswa():
         name = input('Masukkan Nama Siswa: ').title()
         
         # Validasi Input Nama Siswa  
-        if name.replace(' ','').isalpha() == True :
+        if name.replace(' ','').isalpha() == True:
             break
         else:
             print('Silahkan masukkan nama yang benar')
@@ -192,8 +226,8 @@ def tambah_siswa():
 
     # Menambah data dengan fungsi append
     list_data_siswa.append({
-        'Nama' : name,
         'NIS' : nissiswa,
+        'Nama' : name,
         'Jenis Kelamin' : jenis_kelamin,
         'Avg Ulangan Harian' : avg_ulangan_harian,
         'MID': mid,
@@ -225,15 +259,23 @@ def update_siswa():
     data_siswa(list_data_siswa)
 
     while True:
-        # Memasukkan input angka yang ingin diupdate
-        no_siswa = int(input('Masukkan nomor urut yang ingin diupdate nilainya: ')) - 1
-        
-        # Menjalankan fungsi untuk validasi apakah data tersedia atau tidak
-        if no_siswa > 0 or no_siswa < len(list_data_siswa):
-            break
-        else:
-            print('Nomor tidak tersedia')
-            continue
+        try:
+            # Memasukkan input NIS Siswa
+            no_nis = int(input('Masukkan NIS yang ingin diupdate: '))
+
+            siswa = []
+            for i in list_data_siswa:
+                if i['NIS'] == no_nis:
+                    siswa = i
+                    break
+
+            # Menjalankan fungsi untuk validasi jenis kelamin
+            if siswa:
+                break
+            else:
+                print('Silahkan masukkan NIS yang benar!')
+        except ValueError:
+            print('Silahkan inputkan angka!')    
 
     while True:
         update_siswa_kategori = input('''
@@ -242,7 +284,8 @@ def update_siswa():
 ================================
  1. Update Nama
  2. Update Nilai
- 3. Kembali Sub Menu
+ 3. Update Keseluruhan
+ 4. Kembali Sub Menu
 ================================                   
 Masukkan angka yang ingin dipilih:''')
     
@@ -263,16 +306,16 @@ Masukkan angka yang ingin dipilih:''')
                 
                 # Menjalankan fungsi ketika ingin menimpan hasil update
                 if cek_update_nama.lower() in ['ya', 'yes','y']:
-                    list_data_siswa[no_siswa]['Nama'] = nama_update
+                    siswa['Nama'] = nama_update
                     data_siswa(list_data_siswa)
-                    print(f'data  dengan nomor {no_siswa + 1} berhasil diupdate')
+                    print(f'data  dengan NIS {no_nis} berhasil diupdate')
                     break
                 elif cek_update_nama.lower() in ['tidak', 'no']:
                     data_siswa(list_data_siswa)
                     print('data nama tidak diupdate')
                     break
                 else:
-                    print('Silahkan masukkan kata Ya/Tidak')
+                    print('Silahkan masukkan kata (Ya/Tidak)')
 
         elif update_siswa_kategori == '2':
             while True:
@@ -320,22 +363,103 @@ Masukkan angka yang ingin dipilih:''')
                 # Menjalankan fungsi untuk memastikan data diupdate atau tidak
                 if cek_update_nilai.lower() in ['ya', 'yes', 'y']:
                     # Menambahkan data nilai siswa yang sudah di input ke list data siswa
-                    list_data_siswa[no_siswa]['Avg Ulangan Harian'] = nilai_siswa_avg
-                    list_data_siswa[no_siswa]['MID'] = nilai_siswa_mid
-                    list_data_siswa[no_siswa]['UAS'] = nilai_siswa_uas
-                    list_data_siswa[no_siswa]['Nilai Akhir'] = nilai_siswa_nilai_akhir
-                    list_data_siswa[no_siswa]['Ket'] = nilai_siswa_ket
+                    siswa['Avg Ulangan Harian'] = nilai_siswa_avg
+                    siswa['MID'] = nilai_siswa_mid
+                    siswa['UAS'] = nilai_siswa_uas
+                    siswa['Nilai Akhir'] = nilai_siswa_nilai_akhir
+                    siswa['Ket'] = nilai_siswa_ket
 
                     # Menampilkan data siswa setelah mengupdate nilai
                     data_siswa(list_data_siswa)
-                    print(f'Data siswa nomor {no_siswa + 1} telah diupdate.')
+                    print(f'Data siswa nomor {no_nis} telah diupdate.')
                     break
 
-                elif cek_update_nilai.lower() in ['tidak', 'no','n','t5']:
+                elif cek_update_nilai.lower() in ['tidak', 'no','n','t']:
                     data_siswa(list_data_siswa)
                     print('data nilai tidak diupdate')
                     break
         elif update_siswa_kategori == '3':
+            while True:
+                nama_update = input('Masukkan nama yang baru: ').title()
+
+                # Validasi Input Nama Siswa  
+                if nama_update.replace(' ','').isalpha() == True:
+                    break
+                else:
+                    print('Silahkan masukkan nama yang benar')
+                # Validasi Input Jenis Kelamin
+            while True:
+            # Memasukkan input jenis kelamin
+                jenis_kelamin = input('Masukkan Jenis Kelamin Siswa(Laki-laki/Perempuan): ').capitalize()
+
+                # Menjalankan fungsi untuk validasi jenis kelamin
+                if jenis_kelamin.lower() in ['laki-laki', 'perempuan']:
+                    break
+                else:
+                    print('Silahkan masukkan jenis kelamin yang benar!')
+            while True:
+                try:
+                    nilai_siswa_avg = float(input('Masukkan nilai avg ulangan harian yang terbaru: '))
+                    if 0 <= nilai_siswa_avg <= 100:
+                        break
+                    else:
+                        print('Silahkan masukkan angka antara 0 sampai 100!')
+                except:
+                    print('Silahkan inputkan angka!')
+            
+            while True:
+                try:
+                    nilai_siswa_mid = float(input('Masukkan nilai mid yang terbaru: '))
+                    if 0 <= nilai_siswa_mid <= 100:
+                        break
+                    else:
+                        print('Silahkan masukkan angka antara 0 sampai 100!')
+                except:
+                    print('Silahkan inputkan angka!')
+            
+            while True:
+                try:
+                    nilai_siswa_uas = float(input('Masukkan nilai uas yang terbaru: '))
+                    if 0 <= nilai_siswa_uas <= 100:
+                        break
+                    else:
+                        print('Silahkan masukkan angka antara 0 sampai 100!')
+                except:
+                    print('Silahkan inputkan angka!')
+
+            # Menghitung nilai akhir 
+            nilai_siswa_nilai_akhir = (nilai_siswa_avg * 0.3) + (nilai_siswa_mid * 0.3) + (nilai_siswa_uas * 0.4)
+
+            # Menjalankan fungsi untuk menyatakan keterangan lulus atau tidak
+            if nilai_siswa_nilai_akhir >= 80:
+                nilai_siswa_ket = 'Lulus'
+            else:
+                nilai_siswa_ket = 'Tidak Lulus' 
+                
+            while True:
+                # Memasukkan input untuk memastikan data ingin diupdate atau tidak
+                cek_update_nilai = input('Apakah anda yakin ingin mengupdate nilai siswa tersebut? [ya/tidak] : ')
+                # Menjalankan fungsi untuk memastikan data diupdate atau tidak
+                if cek_update_nilai.lower() in ['ya', 'yes', 'y']:
+                    # Menambahkan data nilai siswa yang sudah di input ke list data siswa
+                    siswa['Nama'] = nama_update
+                    siswa['Jenis Kelamin'] = jenis_kelamin
+                    siswa['Avg Ulangan Harian'] = nilai_siswa_avg
+                    siswa['MID'] = nilai_siswa_mid
+                    siswa['UAS'] = nilai_siswa_uas
+                    siswa['Nilai Akhir'] = nilai_siswa_nilai_akhir
+                    siswa['Ket'] = nilai_siswa_ket
+
+                    # Menampilkan data siswa setelah mengupdate nilai
+                    data_siswa(list_data_siswa)
+                    print(f'Data siswa nomor {no_nis} telah diupdate.')
+                    break
+
+                elif cek_update_nilai.lower() in ['tidak', 'no','n','t']:
+                    data_siswa(list_data_siswa)
+                    print('data nilai tidak diupdate')
+                    break
+        elif update_siswa_kategori == '4':
             break
 
         else:
@@ -387,16 +511,19 @@ def sub_menu_data_siswa():
         List Menampilkan Data Nilai Siswa           
 ===============================================
  1. Menampilkan Data Nilai Siswa 
- 2. Filter Data Siswa            
- 3. Kembali ke main menu         
+ 2. Search Data Nilai Siswa
+ 3. Filter Data Nilai Siswa            
+ 4. Kembali ke main menu         
 ===============================================
 Masukkan pilihan list menu: ''')
         
         if sub_menu1 == '1':
             data_siswa(list_data_siswa)
         elif sub_menu1 == '2':
-            filter_siswa(list_data_siswa)
+            search_siswa(list_data_siswa)
         elif sub_menu1 == '3':
+            filter_siswa(list_data_siswa)
+        elif sub_menu1 == '4':
             break
         else:
             print('Pilihan menu yang Anda masukkan tidak tersedia')
