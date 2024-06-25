@@ -129,7 +129,7 @@ def filter_siswa(list_data_siswa, header=['No', 'NIS', 'Nama', 'Jenis Kelamin', 
     while True:
         try:
             # Memasukkan input jenis kelamin yang ingin di filter
-            jenis_kelamin = input('5Masukkan kategori jenis kelamin yang ingin ditampilkan (Laki-laki/Perempuan):')
+            jenis_kelamin = input('Masukkan kategori jenis kelamin yang ingin ditampilkan (Laki-laki/Perempuan):')
 
             # Membuat table kosong
             table3 = []
